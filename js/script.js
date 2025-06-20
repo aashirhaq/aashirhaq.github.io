@@ -1,175 +1,175 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.querySelector('.nav ul');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-    });
+document.addEventListener('DOMContentLoaded', function () {
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const navMenu = document.querySelector('.nav ul');
 
-    // Close mobile menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav ul li a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-        });
-    });
+  mobileMenuBtn.addEventListener('click', function () {
+    navMenu.classList.toggle('active');
+  });
 
-    // Header scroll effect
-    const header = document.querySelector('.header');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+  // Close mobile menu when clicking on a link
+  const navLinks = document.querySelectorAll('.nav ul li a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      navMenu.classList.remove('active');
     });
+  });
 
-    // Scroll to top button
-    const scrollTopBtn = document.querySelector('.scroll-top');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            scrollTopBtn.classList.add('active');
-        } else {
-            scrollTopBtn.classList.remove('active');
-        }
-    });
-
-    scrollTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Animate skill bars
-    const skillBars = document.querySelectorAll('.skill-level');
-    function animateSkillBars() {
-        skillBars.forEach(bar => {
-            const level = bar.getAttribute('data-level');
-            bar.style.width = level + '%';
-        });
+  // Header scroll effect
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 100) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
     }
+  });
 
-    // Animate stats with K/M formatting
-const statNumbers = document.querySelectorAll('.stat-number');
-function animateStats() {
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-count'));
-        const duration = 2000;
-        const step = target / (duration / 16); // 60fps
-        
-        let current = 0;
-        const increment = () => {
-            current += step;
-            if (current < target) {
-                // Format the number during animation
-                stat.textContent = formatNumber(Math.floor(current));
-                requestAnimationFrame(increment);
-            } else {
-                // Final formatted number
-                stat.textContent = formatNumber(target);
-            }
-        };
-        
-        increment();
+  // Scroll to top button
+  const scrollTopBtn = document.querySelector('.scroll-top');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.add('active');
+    } else {
+      scrollTopBtn.classList.remove('active');
+    }
+  });
+
+  scrollTopBtn.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
-}
+  });
 
-// Helper function to format numbers with K/M suffixes
-function formatNumber(num) {
+  // Animate skill bars
+  const skillBars = document.querySelectorAll('.skill-level');
+  function animateSkillBars() {
+    skillBars.forEach(bar => {
+      const level = bar.getAttribute('data-level');
+      bar.style.width = level + '%';
+    });
+  }
+
+  // Animate stats with K/M formatting (simplified decimals)
+  const statNumbers = document.querySelectorAll('.stat-number');
+  function animateStats() {
+    statNumbers.forEach(stat => {
+      const target = parseInt(stat.getAttribute('data-count'));
+      const duration = 2000;
+      const step = target / (duration / 16); // 60fps
+
+      let current = 0;
+      const increment = () => {
+        current += step;
+        if (current < target) {
+          stat.textContent = formatNumber(Math.floor(current));
+          requestAnimationFrame(increment);
+        } else {
+          stat.textContent = formatNumber(target);
+        }
+      };
+
+      increment();
+    });
+  }
+
+  // Helper function to format numbers with clean K/M suffixes
+  function formatNumber(num) {
     if (num >= 1000000) {
-        return (num / 1000000).toFixed(1) + 'M';
+      const millions = num / 1000000;
+      return millions % 1 === 0 ? `${millions}M` : `${millions.toFixed(1)}M`;
     }
     if (num >= 1000) {
-        return (num / 1000).toFixed(1) + 'K';
+      const thousands = num / 1000;
+      return thousands % 1 === 0 ? `${thousands}K` : `${thousands.toFixed(1)}K`;
     }
     return num.toString();
-}
+  }
 
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1
-    };
+  // Intersection Observer for animations
+  const observerOptions = {
+    threshold: 0.1
+  };
 
-    const observer = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('skills-category')) {
-                    animateSkillBars();
-                } else if (entry.target.classList.contains('about-stats')) {
-                    animateStats();
-                }
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe elements
-    const skillsSection = document.querySelector('.skills-category');
-    if (skillsSection) observer.observe(skillsSection);
-
-    const statsSection = document.querySelector('.about-stats');
-    if (statsSection) observer.observe(statsSection);
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
+  const observer = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (entry.target.classList.contains('skills-category')) {
+          animateSkillBars();
+        } else if (entry.target.classList.contains('about-stats')) {
+          animateStats();
+        }
+        observer.unobserve(entry.target);
+      }
     });
+  }, observerOptions);
 
-    // Current year in footer
-    const yearElement = document.getElementById('year');
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-    }
+  // Observe elements
+  const skillsSection = document.querySelector('.skills-category');
+  if (skillsSection) observer.observe(skillsSection);
 
-    // Contact form submission
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would typically send the form data to a server
-            // For this example, we'll just log it and show an alert
-            console.log({ name, email, subject, message });
-            
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
+  const statsSection = document.querySelector('.about-stats');
+  if (statsSection) observer.observe(statsSection);
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
         });
-    }
+      }
+    });
+  });
 
-    // Initialize animations when page loads if elements are already visible
-    if (isElementInViewport(skillsSection)) {
-        animateSkillBars();
-    }
-    if (isElementInViewport(statsSection)) {
-        animateStats();
-    }
+  // Current year in footer
+  const yearElement = document.getElementById('year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  // Contact form submission
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+
+      // Here you would typically send the form data to a server
+      // For this example, we'll just log it and show an alert
+      console.log({ name, email, subject, message });
+
+      alert('Thank you for your message! I will get back to you soon.');
+      contactForm.reset();
+    });
+  }
+
+  // Initialize animations when page loads if elements are already visible
+  if (isElementInViewport(skillsSection)) {
+    animateSkillBars();
+  }
+  if (isElementInViewport(statsSection)) {
+    animateStats();
+  }
 });
 
 // Helper function to check if element is in viewport
 function isElementInViewport(el) {
-    if (!el) return false;
-    const rect = el.getBoundingClientRect();
-    return (
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.bottom >= 0
-    );
+  if (!el) return false;
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.bottom >= 0
+  );
 }

@@ -664,6 +664,7 @@ section {
 .sts-content {
     background-color: #fff;
     padding: 40px;
+    padding-bottom: 2px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
