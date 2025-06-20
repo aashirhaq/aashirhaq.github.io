@@ -3,11 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
     <title>Muhammad Aashir ul Haque | Senior Backend Engineer</title>
+    <meta name="title" content="Muhammad Aashir ul Haque | Senior Backend Engineer">
+    <meta name="description" content="6+ years experience building scalable systems for 20M+ users. Laravel, Node.js, AWS expert specializing in high-performance backend solutions.">
+    
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aashirhaq.github.io/">
+    <meta property="og:title" content="Muhammad Aashir ul Haque | Senior Backend Engineer">
+    <meta property="og:description" content="6+ years experience building scalable systems for 20M+ users. Laravel, Node.js, AWS expert specializing in high-performance backend solutions.">
+    <meta property="og:image" content="https://aashirhaq.github.io/images/social-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aashirhaq.github.io/">
+    <meta property="twitter:title" content="Muhammad Aashir ul Haque | Senior Backend Engineer">
+    <meta property="twitter:description" content="6+ years experience building scalable systems for 20M+ users. Laravel, Node.js, AWS expert specializing in high-performance backend solutions.">
+    <meta property="twitter:image" content="https://aashirhaq.github.io/images/social-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aashirhaq.github.io/">
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -32,7 +63,7 @@
         </div>
     </header>
 
-    <section id="home" class="hero">
+    <section id="home" class="hero" itemscope itemtype="https://schema.org/Person">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -445,11 +476,25 @@
                         <div class="sts-score">85/100</div>
                     </div>
                 </div>
-                <!-- <div class="sts-summary">
-                    <h3>Summary</h3>
-                    <p>Your strongest areas are Backend Development (Laravel/Node.js) and Performance Optimization, with excellent demonstrated results in high-traffic systems. You show significant expertise in Payment Systems integration and Cloud Architecture. Leadership skills are well-developed through mentoring experience.</p>
-                    <p>Overall technical competency score: <strong>91/100</strong> (Senior Backend Engineer level)</p>
-                </div> -->
+                <div class="professional-summary">
+                    <div class="summary-visual">
+                        <div class="competency-meter">
+                            <div class="meter-gauge" style="--score:91;"></div>
+                            <div class="meter-label">91/100</div>
+                        </div>
+                        <div class="competency-level">Senior Backend Engineer</div>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Professional Evaluation</h3>
+                        <p>Demonstrated expertise in architecting and optimizing high-traffic backend systems serving <strong>20M+ users</strong>. Proven ability to deliver <strong>30%+ performance gains</strong> through advanced caching strategies and architectural improvements.</p>
+                        <p>Specialized in:</p>
+                        <ul>
+                            <li><strong>Payment Systems</strong> (10+ gateway integrations)</li>
+                            <li><strong>Cloud Architecture</strong> (99.9% system reliability)</li>
+                            <li><strong>Team Leadership</strong> (30% productivity improvement)</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -542,5 +587,29 @@
     </div>
 
     <script src="js/script.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Muhammad Aashir ul Haque",
+        "jobTitle": "Senior Backend Engineer",
+        "url": "https://aashirhaq.github.io",
+        "sameAs": [
+            "https://www.linkedin.com/in/aashirhaq",
+            "https://github.com/aashirhaq",
+            "https://stackoverflow.com/users/7940641/aashir-haque"
+        ],
+        "description": "Backend Engineer with 6+ years of experience in building scalable, cloud-native systems using Laravel, Node.js, and AWS.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Glen Ellyn",
+            "addressRegion": "IL",
+            "addressCountry": "USA"
+        },
+        "email": "mailto:aashirulhaque@gmail.com",
+        "telephone": "+1-630-943-2845",
+        "image": "https://aashirhaq.github.io/images/profile.jpg"
+    }
+    </script>
 </body>
 </html>
