@@ -212,3 +212,20 @@ function forceDownload(url, fileName) {
         window.open(url, '_blank');
     });
 }
+
+// Form submission handling
+document.querySelector('form[netlify]')?.addEventListener('submit', function(e) {
+  const form = this;
+  
+  // Only prevent default if form is invalid
+  if (!form.checkValidity()) {
+    e.preventDefault();
+    alert('Please fill all required fields!');
+    return;
+  }
+  
+  // Show loading state
+  const submitBtn = form.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending...';
+});

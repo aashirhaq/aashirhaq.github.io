@@ -1,9 +1,8 @@
 [build]
   publish = "/"
-  command = ""
 
 [[redirects]]
-  from = "/thank-you.html"
+  from = "/contact"
   to = "/#contact"
   status = 301
   force = true
@@ -14,5 +13,5 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
 
-[context.production.environment]
-  NETLIFY_FORMS_HANDLER = "true"
+[[plugins]]
+  package = "@netlify/plugin-forms"
