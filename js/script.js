@@ -213,19 +213,22 @@ function forceDownload(url, fileName) {
     });
 }
 
-// Form submission handling
+// Form submission handler
 document.querySelector('form[netlify]')?.addEventListener('submit', function(e) {
-  const form = this;
-  
   // Only prevent default if form is invalid
-  if (!form.checkValidity()) {
+  if (!this.checkValidity()) {
     e.preventDefault();
     alert('Please fill all required fields!');
     return;
   }
   
-  // Show loading state
-  const submitBtn = form.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = 'Sending...';
+  // Change button state
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  
+  // Force Netlify domain for submission
+  if (window.location.hostname === 'aashirhaq.github.io') {
+    this.action = 'https://aashirhaq.netlify.app' + this.action;
+  }
 });
