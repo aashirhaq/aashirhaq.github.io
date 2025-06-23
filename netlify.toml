@@ -14,4 +14,4 @@
     X-XSS-Protection = "1; mode=block"
 
 [context.production.environment]
-  NETLIFY_FORM_RECIPIENT = "aashirulhaque@gmail.com"
+  NETLIFY_FORMS_HANDLER = "true"
