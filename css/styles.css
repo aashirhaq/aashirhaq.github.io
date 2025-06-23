@@ -1095,6 +1095,14 @@ section {
     border-bottom-color: var(--secondary-color);
 }
 
+.hidden {
+    position: absolute;
+    left: -9999px;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
 /* Responsive Styles */
 @media (max-width: 992px) {
     .hero-content {
