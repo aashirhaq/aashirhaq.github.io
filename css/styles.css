@@ -1027,6 +1027,46 @@ section {
     font-weight: 600;
 }
 
+
+
+
+
+/* For Option 1 - Professional Projects Section */
+.professional-projects {
+    background-color: rgba(241, 243, 245, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* For Option 2 - Professional Badge */
+.project-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--primary-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.professional-project {
+    border: 2px solid rgba(52, 152, 219, 0.2);
+}
+
+.project-company {
+    display: inline-block;
+    margin-right: 15px;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.project-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
 /* Responsive Styles */
 @media (max-width: 992px) {
     .hero-content {
