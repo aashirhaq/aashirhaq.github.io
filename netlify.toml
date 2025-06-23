@@ -3,9 +3,10 @@
   command = ""
 
 [[redirects]]
-  from = "/contact"
+  from = "/thank-you.html"
   to = "/#contact"
   status = 301
+  force = true
 
 [[headers]]
   for = "/*"
