@@ -173,3 +173,42 @@ function isElementInViewport(el) {
     rect.bottom >= 0
   );
 }
+
+// In your script.js
+document.querySelectorAll('a[download]').forEach(link => {
+    link.addEventListener('click', function() {
+        gtag('event', 'download', {
+            'event_category': 'resume',
+            'event_label': 'Resume Download'
+        });
+    });
+});
+
+// Add this to your script.js
+document.querySelectorAll('a[href$=".pdf"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      forceDownload(this.href, 'Aashir_Haque_Resume.pdf');
+    });
+});
+
+function forceDownload(url, fileName) {
+    fetch(url, {
+        mode: 'no-cors'
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(blobUrl);
+        document.body.removeChild(a);
+    })
+    .catch(e => {
+        // Fallback to normal link if fetch fails
+        window.open(url, '_blank');
+    });
+}

@@ -69,7 +69,7 @@ section {
 
 .btn {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 8px 20px;
     background-color: var(--primary-color);
     color: #fff;
     border: none;
@@ -529,6 +529,7 @@ section {
 }
 
 .project-card {
+    position: relative;
     background-color: #fff;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -542,8 +543,9 @@ section {
 }
 
 .project-image {
-    height: 200px;
+    position: relative;
     overflow: hidden;
+    height: 200px;
 }
 
 .project-image img {
@@ -1027,10 +1029,6 @@ section {
     font-weight: 600;
 }
 
-
-
-
-
 /* For Option 1 - Professional Projects Section */
 .professional-projects {
     background-color: rgba(241, 243, 245, 0.5);
@@ -1039,7 +1037,7 @@ section {
 
 /* For Option 2 - Professional Badge */
 .project-badge {
-    position: absolute;
+       position: absolute;
     top: 15px;
     right: 15px;
     background: var(--primary-color);
@@ -1049,6 +1047,9 @@ section {
     font-size: 0.8rem;
     font-weight: 600;
     z-index: 2;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .professional-project {
@@ -1065,6 +1066,33 @@ section {
 .project-date {
     color: var(--text-light);
     font-size: 0.9rem;
+}
+
+/* Resume Button Styling */
+.btn-resume {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-resume:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.resume-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dashed var(--primary-color);
+    transition: all 0.2s ease;
+}
+
+.resume-link:hover {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
 }
 
 /* Responsive Styles */
@@ -1171,6 +1199,15 @@ section {
     
     .meter-label {
         font-size: 2rem;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .btn-resume {
+        margin-left: 0;
+        margin-top: 10px;
     }
 }
 
