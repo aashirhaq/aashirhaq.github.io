@@ -226,9 +226,4 @@ document.querySelector('form[netlify]')?.addEventListener('submit', function(e) 
   const btn = this.querySelector('button[type="submit"]');
   btn.disabled = true;
   btn.textContent = 'Sending...';
-  
-  // Force Netlify domain for submission
-  if (window.location.hostname === 'aashirhaq.github.io') {
-    this.action = 'https://aashirhaq.netlify.app' + this.action;
-  }
 });
