@@ -208,7 +208,39 @@ function forceDownload(url, fileName) {
         document.body.removeChild(a);
     })
     .catch(e => {
-        // Fallback to normal link if fetch fails
         window.open(url, '_blank');
     });
 }
+
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending...';
+  
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('Thank you! Your message has been sent successfully.');
+      form.reset();
+    } else {
+      alert('There was a problem sending your message. Please try again.');
+    }
+  })
+  .catch(error => {
+    alert('There was an error sending your message.');
+  })
+  .finally(() => {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send Message';
+  });
+});
