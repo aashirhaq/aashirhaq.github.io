@@ -767,6 +767,7 @@ section {
 }
 
 .contact-form {
+    height: 100%;
     flex: 1;
     background-color: #fff;
     padding: 30px;
