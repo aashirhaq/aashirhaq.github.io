@@ -12,6 +12,24 @@ export function HeroSection() {
     setMounted(true)
   }, [])
 
+  // Google Analytics tracking function
+  const trackResumeDownload = () => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "download", {
+        event_category: "Resume",
+        event_label: "Aashir_Haque_Resume.pdf",
+        value: 1,
+      })
+
+      // Also track as a custom event
+      window.gtag("event", "resume_download", {
+        event_category: "Engagement",
+        event_label: "Hero Section",
+        custom_parameter_1: "resume_pdf",
+      })
+    }
+  }
+
   if (!mounted) return null
 
   return (
@@ -56,7 +74,11 @@ export function HeroSection() {
                 className="border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
                 asChild
               >
-                <a href="/downloads/Aashir_Haque_Resume.pdf" download="Aashir_Haque_Resume.pdf">
+                <a
+                  href="/downloads/Aashir_Haque_Resume.pdf"
+                  download="Aashir_Haque_Resume.pdf"
+                  onClick={trackResumeDownload}
+                >
                   Download Resume
                 </a>
               </Button>

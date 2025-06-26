@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react"
 import { useState } from "react"
+import { trackFormSubmission } from "./analytics"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -41,11 +42,17 @@ export function ContactSection() {
       if (response.ok) {
         setSubmitStatus("success")
         setFormData({ name: "", email: "", subject: "", message: "" })
+        // Track successful form submission
+        trackFormSubmission("Contact Form", true)
       } else {
         setSubmitStatus("error")
+        // Track failed form submission
+        trackFormSubmission("Contact Form", false)
       }
     } catch (error) {
       setSubmitStatus("error")
+      // Track failed form submission
+      trackFormSubmission("Contact Form", false)
     } finally {
       setIsSubmitting(false)
     }
