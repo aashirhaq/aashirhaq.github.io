@@ -7,6 +7,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { SkillsSection } from "@/components/skills-section"
 import { Analytics } from "@/components/analytics"
+import { BackToTop } from "@/components/back-to-top"
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   )
 }

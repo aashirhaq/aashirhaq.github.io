@@ -63,7 +63,7 @@ export function AboutSection() {
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Proven record of delivering resilient platforms for 20M+ users and optimizing backend systems through
               caching, logging, and asynchronous processing. I'm passionate about mentoring junior developers and have
-              successfully guided 6+ team members, enhancing overall team productivity by 30%.
+              successfully guided 10+ team members, enhancing overall team productivity by 30%.
             </p>
             <div className="flex flex-wrap gap-2">
               {skills.map((skill) => (
