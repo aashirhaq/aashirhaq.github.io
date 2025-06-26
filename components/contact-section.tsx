@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react"
 import { useState } from "react"
 
 export function ContactSection() {
@@ -18,10 +18,37 @@ export function ContactSection() {
     message: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const form = e.currentTarget
+      const formData = new FormData(form)
+
+      const response = await fetch("https://formspree.io/f/mnnvgrdd", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", subject: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -73,12 +100,22 @@ export function ContactSection() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form
-                onSubmit={handleSubmit}
-                action="https://formspree.io/f/mnnvgrdd"
-                method="POST"
-                className="space-y-6"
-              >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Formspree Configuration Fields */}
+                <input type="hidden" name="_subject" value="New contact form submission from portfolio" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+
+                {/* Honeypot Field - Hidden from users but visible to bots */}
+                <div style={{ display: "none" }}>
+                  <label htmlFor="_gotcha">Don't fill this out if you're human:</label>
+                  <input type="text" name="_gotcha" id="_gotcha" tabIndex={-1} autoComplete="off" />
+                </div>
+
+                {/* Alternative honeypot with common bot-targeted names */}
+                <input type="text" name="website" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+                <input type="email" name="email_confirm" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
@@ -89,6 +126,8 @@ export function ContactSection() {
                       onChange={handleChange}
                       placeholder="Your name"
                       required
+                      disabled={isSubmitting}
+                      autoComplete="name"
                     />
                   </div>
                   <div className="space-y-2">
@@ -101,6 +140,8 @@ export function ContactSection() {
                       onChange={handleChange}
                       placeholder="your.email@example.com"
                       required
+                      disabled={isSubmitting}
+                      autoComplete="email"
                     />
                   </div>
                 </div>
@@ -114,6 +155,8 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="What's this about?"
                     required
+                    disabled={isSubmitting}
+                    autoComplete="off"
                   />
                 </div>
 
@@ -127,16 +170,48 @@ export function ContactSection() {
                     placeholder="Tell me about your project or idea..."
                     rows={6}
                     required
+                    disabled={isSubmitting}
+                    autoComplete="off"
                   />
                 </div>
 
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <div className="flex items-center space-x-2 text-green-600 bg-green-50 p-3 rounded-md">
+                    <CheckCircle className="h-5 w-5" />
+                    <span>Thank you! Your message has been sent successfully. I'll get back to you soon.</span>
+                  </div>
+                )}
+
+                {submitStatus === "error" && (
+                  <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-md">
+                    <AlertCircle className="h-5 w-5" />
+                    <span>Sorry, there was an error sending your message. Please try again or email me directly.</span>
+                  </div>
+                )}
+
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="h-4 w-4 mr-2" />
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
+
+                {/* Anti-spam notice */}
+                <p className="text-xs text-muted-foreground text-center">
+                  This form is protected against spam. Your privacy is important to us.
+                </p>
               </form>
             </CardContent>
           </Card>
