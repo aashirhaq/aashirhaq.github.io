@@ -246,7 +246,7 @@ export function ContactSection() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg transition-shadow duration-300">
+            {/* <Card className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-2">Ready to Start?</h3>
                 <p className="text-purple-100 mb-4">Let's discuss your project and bring your ideas to life.</p>
@@ -254,7 +254,7 @@ export function ContactSection() {
                   Schedule a Call
                 </Button>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </div>

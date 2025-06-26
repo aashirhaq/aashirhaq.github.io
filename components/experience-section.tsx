@@ -166,7 +166,7 @@ export function ExperienceSection() {
             </div>
 
             {/* Certifications */}
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <h4 className="text-lg font-semibold mb-4">Certifications</h4>
               <div className="space-y-3">
                 <Card className="p-4">
@@ -182,7 +182,7 @@ export function ExperienceSection() {
                   <div className="text-xs text-muted-foreground">MongoDB Inc. • 2021</div>
                 </Card>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

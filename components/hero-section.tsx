@@ -96,15 +96,30 @@ export function HeroSection() {
                   />
                 </div>
               </div>
-              {/* Tech stack floating icons */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg animate-pulse">
+
+              {/* Tech stack floating icons - Enhanced with Laravel */}
+              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg animate-pulse shadow-lg">
                 PHP
               </div>
-              <div className="absolute top-1/2 -left-8 w-14 h-14 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-sm animate-pulse delay-1000">
+
+              <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-sm animate-pulse delay-500 shadow-lg">
+                Laravel
+              </div>
+
+              <div className="absolute top-1/2 -left-8 w-14 h-14 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-sm animate-pulse delay-1000 shadow-lg">
                 AWS
               </div>
-              <div className="absolute -bottom-4 left-1/4 w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-xs animate-pulse delay-2000">
+
+              <div className="absolute -bottom-4 left-1/4 w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-xs animate-pulse delay-2000 shadow-lg">
                 API
+              </div>
+
+              <div className="absolute bottom-1/3 -right-6 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-xs animate-pulse delay-1500 shadow-lg">
+                Node.js
+              </div>
+
+              <div className="absolute -bottom-8 right-1/3 w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xs animate-pulse delay-2500 shadow-lg">
+                MySQL
               </div>
             </div>
           </div>

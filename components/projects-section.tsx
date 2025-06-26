@@ -101,17 +101,6 @@ export function ProjectsSection() {
                         Live Demo
                       </a>
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30"
-                      asChild
-                    >
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2" />
-                        Code
-                      </a>
-                    </Button>
                   </div>
                 </div>
               </div>
@@ -176,12 +165,6 @@ export function ProjectsSection() {
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-3 w-3 mr-1" />
                         Demo
-                      </a>
-                    </Button>
-                    <Button size="sm" variant="outline" className="flex-1" asChild>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-3 w-3 mr-1" />
-                        Code
                       </a>
                     </Button>
                   </div>
