@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aashirhaq.github.io/sitemap.xml
