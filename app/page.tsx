@@ -6,10 +6,12 @@ import { ContactSection } from "@/components/contact-section"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { SkillsSection } from "@/components/skills-section"
+import { Analytics } from "@/components/analytics"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      <Analytics />
       <Navigation />
       <main>
         <HeroSection />
