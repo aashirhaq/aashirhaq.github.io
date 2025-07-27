@@ -3,18 +3,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin } from "lucide-react"
+import { PERSONAL_INFO } from "@/lib/constants"
 
 export function ExperienceSection() {
   const experiences = [
     {
-      title: "Senior Software Engineer",
-      company: "Golootlo - DECAGON PAKISTAN PVT. LTD.",
-      location: "Glen Ellyn, IL, USA (Remote)",
-      period: "Jul 2019 – Present (Part-time Remote since Jul 2025)",
-      description:
-        "Leading backend development for high-traffic discount platform serving 20M+ users with advanced payment systems and microservices architecture.",
+      title: PERSONAL_INFO.currentWork.position,
+      company: PERSONAL_INFO.currentWork.company,
+      location: PERSONAL_INFO.currentWork.location,
+      period: `${PERSONAL_INFO.currentWork.startDate} – ${PERSONAL_INFO.currentWork.currentStatus}`,
+      description: `Leading backend development for high-traffic discount platform serving 20M+ users with advanced payment systems and microservices architecture. Currently working ${PERSONAL_INFO.currentWork.type.toLowerCase()} from ${PERSONAL_INFO.location}.`,
       technologies: ["Laravel", "Node.js", "NestJS", "AWS", "Redis", "MySQL", "MongoDB"],
       achievements: [
+        `Transitioned to ${PERSONAL_INFO.currentWork.type.toLowerCase()} role in July 2025, maintaining system reliability from ${PERSONAL_INFO.location}`,
         "Designed and maintained RESTful APIs serving 20M+ users with 60K+ peak concurrency",
         "Built subscription billing platform integrating 10+ local gateways and CyberSource APIs",
         "Improved API speed by 30% and halved DB load via Redis caching strategy",
