@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Moon, Sun, Menu, X } from "lucide-react"
 import { useTheme } from "next-themes"
+import { NAVIGATION_ITEMS, PERSONAL_INFO } from "@/lib/constants"
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -18,14 +19,6 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
-  ]
-
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -36,13 +29,13 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Portfolio
+              {PERSONAL_INFO.displayName}
             </span>
           </div>
 
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
+              {NAVIGATION_ITEMS.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -71,7 +64,7 @@ export function Navigation() {
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background/95 backdrop-blur-md rounded-lg mt-2">
-              {navItems.map((item) => (
+              {NAVIGATION_ITEMS.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}

@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react"
 import { useState } from "react"
 import { trackFormSubmission } from "./analytics"
+import { PERSONAL_INFO, CONTACT_FORM } from "@/lib/constants"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ export function ContactSection() {
       const form = e.currentTarget
       const formData = new FormData(form)
 
-      const response = await fetch("https://formspree.io/f/mnnvgrdd", {
+      const response = await fetch(CONTACT_FORM.formspreeEndpoint, {
         method: "POST",
         body: formData,
         headers: {
@@ -65,23 +66,23 @@ export function ContactSection() {
     }))
   }
 
-  const contactInfo = [
+    const contactInfo = [
     {
       icon: Mail,
       label: "Email",
-      value: "aashirulhaque@gmail.com",
-      href: "mailto:aashirulhaque@gmail.com",
+      value: PERSONAL_INFO.email,
+      href: PERSONAL_INFO.social.email,
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+1 (630) 943-2845",
-      href: "tel:+16309432845",
+      value: PERSONAL_INFO.phone,
+      href: PERSONAL_INFO.social.phone,
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Glen Ellyn, IL, USA",
+      value: PERSONAL_INFO.location,
       href: "#",
     },
   ]
@@ -109,7 +110,7 @@ export function ContactSection() {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Formspree Configuration Fields */}
-                <input type="hidden" name="_subject" value="New contact form submission from portfolio" />
+                <input type="hidden" name="_subject" value={CONTACT_FORM.subjects.default} />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_template" value="table" />
 

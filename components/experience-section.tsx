@@ -9,8 +9,8 @@ export function ExperienceSection() {
     {
       title: "Senior Software Engineer",
       company: "Golootlo - DECAGON PAKISTAN PVT. LTD.",
-      location: "Karachi, Pakistan",
-      period: "Jul 2019 – Present",
+      location: "Glen Ellyn, IL, USA (Remote)",
+      period: "Jul 2019 – Present (Part-time Remote since Jul 2025)",
       description:
         "Leading backend development for high-traffic discount platform serving 20M+ users with advanced payment systems and microservices architecture.",
       technologies: ["Laravel", "Node.js", "NestJS", "AWS", "Redis", "MySQL", "MongoDB"],

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowDown, Github, Linkedin, Mail, Database, Server, Cloud } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { PERSONAL_INFO } from "@/lib/constants"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
@@ -17,7 +18,7 @@ export function HeroSection() {
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("event", "download", {
         event_category: "Resume",
-        event_label: "Aashir_Haque_Resume.pdf",
+        event_label: PERSONAL_INFO.resume.filename,
         value: 1,
       })
 
@@ -51,13 +52,12 @@ export function HeroSection() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6">
               <span className="block text-foreground">Hi, I'm</span>
               <span className="block bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent leading-tight">
-                Muhammad Aashir ul Haque
+                {PERSONAL_INFO.name}
               </span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 lg:mb-8 leading-relaxed">
-              Senior Backend Engineer building scalable, cloud-native systems for 20M+ users. Laravel, Node.js, and AWS
-              expert specializing in high-performance solutions.
+              {PERSONAL_INFO.description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center lg:justify-start mb-6 lg:mb-8">
@@ -71,12 +71,12 @@ export function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white text-sm sm:text-base"
+                className="border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white text-sm sm:text-base bg-transparent"
                 asChild
               >
                 <a
-                  href="/downloads/Aashir_Haque_Resume.pdf"
-                  download="Aashir_Haque_Resume.pdf"
+                  href={PERSONAL_INFO.resume.path}
+                  download={PERSONAL_INFO.resume.filename}
                   onClick={trackResumeDownload}
                 >
                   Download Resume
@@ -86,17 +86,17 @@ export function HeroSection() {
 
             <div className="flex justify-center lg:justify-start space-x-4 lg:space-x-6">
               <Button variant="ghost" size="icon" className="hover:text-purple-600" asChild>
-                <a href="https://github.com/aashirhaq" target="_blank" rel="noopener noreferrer">
+                <a href={PERSONAL_INFO.social.github} target="_blank" rel="noopener noreferrer">
                   <Github className="h-5 w-5 lg:h-6 lg:w-6" />
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-purple-600" asChild>
-                <a href="https://www.linkedin.com/in/aashirhaq" target="_blank" rel="noopener noreferrer">
+                <a href={PERSONAL_INFO.social.linkedin} target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-5 w-5 lg:h-6 lg:w-6" />
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-purple-600" asChild>
-                <a href="mailto:aashirulhaque@gmail.com">
+                <a href={PERSONAL_INFO.social.email}>
                   <Mail className="h-5 w-5 lg:h-6 lg:w-6" />
                 </a>
               </Button>
@@ -109,8 +109,8 @@ export function HeroSection() {
               <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-80 lg:h-80 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 p-2">
                 <div className="w-full h-full rounded-full overflow-hidden bg-background">
                   <Image
-                    src="/images/profile.jpg"
-                    alt="Muhammad Aashir ul Haque"
+                    src={PERSONAL_INFO.images.profile || "/placeholder.svg"}
+                    alt={PERSONAL_INFO.name}
                     width={320}
                     height={320}
                     className="w-full h-full object-cover"
@@ -181,7 +181,7 @@ export function HeroSection() {
                 title="MongoDB"
               >
                 {/* MongoDB Logo SVG */}
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:w-6" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z" />
                 </svg>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
