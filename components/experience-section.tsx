@@ -2,8 +2,8 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin } from "lucide-react"
-import { PERSONAL_INFO } from "@/lib/constants"
+import { Calendar, MapPin, Award, BookOpen } from "lucide-react"
+import { PERSONAL_INFO, EDUCATION } from "@/lib/constants"
 
 export function ExperienceSection() {
   const experiences = [
@@ -49,26 +49,6 @@ export function ExperienceSection() {
         "Constructed an e-commerce platform using PHP and MySQL with 200+ product listings",
         "Assisted in ASP.NET/SQL Server projects, optimizing legacy systems",
       ],
-    },
-  ]
-
-  const education = [
-    {
-      degree: "MS in Computer Science and Information Technology",
-      school: "NED University of Engineering and Technology",
-      location: "Karachi, Pakistan",
-      period: "2021 – 2022",
-      description: "Advanced studies in computer science with focus on software engineering and system architecture.",
-      achievements: ["Specialized in Backend Systems", "Advanced Database Management", "Cloud Computing"],
-    },
-    {
-      degree: "BS in Computer Science",
-      school: "University of Karachi",
-      location: "Karachi, Pakistan",
-      period: "2015 – 2018",
-      description:
-        "Comprehensive computer science education with strong foundation in programming and software development.",
-      achievements: ["Software Development", "Database Systems", "Web Technologies"],
     },
   ]
 
@@ -133,9 +113,10 @@ export function ExperienceSection() {
 
           {/* Education & Certifications */}
           <div>
+            {/* Education */}
             <h3 className="text-2xl font-semibold mb-8">Education</h3>
-            <div className="space-y-6">
-              {education.map((edu, index) => (
+            <div className="space-y-6 mb-8">
+              {EDUCATION.degrees.map((edu, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-lg">{edu.degree}</CardTitle>
@@ -166,24 +147,60 @@ export function ExperienceSection() {
               ))}
             </div>
 
+            {/* Online Courses */}
+            <h4 className="text-lg font-semibold mb-4">Recent Learning</h4>
+            <div className="space-y-3 mb-8">
+              {EDUCATION.courses.map((course, index) => (
+                <Card
+                  key={index}
+                  className="p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border-green-200 dark:border-green-800"
+                >
+                  <div className="flex items-start space-x-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <BookOpen className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium">{course.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {course.platform} • {course.year}
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">{course.description}</p>
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {course.skills.map((skill) => (
+                          <Badge key={skill} variant="secondary" className="text-xs">
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
             {/* Certifications */}
-            {/* <div className="mt-8">
-              <h4 className="text-lg font-semibold mb-4">Certifications</h4>
-              <div className="space-y-3">
-                <Card className="p-4">
-                  <div className="text-sm font-medium">AWS Certified Solutions Architect</div>
-                  <div className="text-xs text-muted-foreground">Amazon Web Services • 2023</div>
-                </Card>
-                <Card className="p-4">
-                  <div className="text-sm font-medium">Google Cloud Professional Developer</div>
-                  <div className="text-xs text-muted-foreground">Google Cloud • 2022</div>
-                </Card>
-                <Card className="p-4">
-                  <div className="text-sm font-medium">MongoDB Certified Developer</div>
-                  <div className="text-xs text-muted-foreground">MongoDB Inc. • 2021</div>
-                </Card>
-              </div>
-            </div> */}
+            {EDUCATION.certifications.length > 0 && (
+              <>
+                <h4 className="text-lg font-semibold mb-4">Certifications</h4>
+                <div className="space-y-3">
+                  {EDUCATION.certifications.map((cert, index) => (
+                    <Card key={index} className="p-4">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Award className="h-4 w-4 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">{cert.name}</div>
+                          <div className="text-xs text-muted-foreground">
+                            {cert.issuer} • {cert.year}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -8,6 +8,8 @@ export function AboutSection() {
   const skills = [
     "PHP",
     "Laravel",
+    "Python",
+    "FastAPI",
     "JavaScript",
     "Node.js",
     "TypeScript",
@@ -24,22 +26,22 @@ export function AboutSection() {
     {
       icon: Code,
       title: "Backend Architecture",
-      description: "Designing scalable microservices and RESTful APIs that handle millions of requests efficiently.",
+      description: "Designing scalable microservices and RESTful APIs with Laravel, FastAPI, and Node.js that handle millions of requests efficiently.",
     },
     {
       icon: Zap,
       title: "Performance Optimization",
-      description: "Improving system performance by 30%+ through caching strategies and database optimization.",
+      description: "Improving system performance by 30%+ through caching strategies, database optimization, and modern testing with pytest.",
     },
     {
       icon: Palette,
       title: "Payment Systems Integration",
-      description: "Integrating 10+ payment gateways and handling 35K+ daily transactions securely.",
+      description: "Integrating 10+ payment gateways and handling 35K+ daily transactions securely across multiple platforms.",
     },
     {
       icon: Users,
       title: "Team Leadership",
-      description: "Mentoring junior developers and enhancing team productivity through best practices.",
+      description: "Mentoring junior developers and enhancing team productivity through best practices and modern development workflows.",
     },
   ]
 
@@ -57,13 +59,15 @@ export function AboutSection() {
           <div>
             <h3 className="text-2xl font-semibold mb-6">My Journey</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Backend Engineer specializing in building scalable, cloud-native systems using Laravel, Node.js, and AWS.
-              Expert in API performance optimization and microservices architecture.
+              Backend Engineer specializing in building scalable, cloud-native systems using Laravel, FastAPI, Node.js,
+              and AWS. Expert in API performance optimization and microservices architecture with comprehensive testing
+              strategies.
             </p>
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Proven record of delivering resilient platforms for 20M+ users and optimizing backend systems through
-              caching, logging, and asynchronous processing. I'm passionate about mentoring junior developers and have
-              successfully guided 10+ team members, enhancing overall team productivity by 30%.
+              caching, logging, and asynchronous processing. Recently completed advanced FastAPI training with pytest
+              for modern Python development. I'm passionate about mentoring junior developers and have successfully
+              guided 6+ team members, enhancing overall team productivity by 30%.
             </p>
             <div className="flex flex-wrap gap-2">
               {skills.map((skill) => (
@@ -90,8 +94,8 @@ export function AboutSection() {
               </div>
               <div className="aspect-square rounded-xl bg-gradient-to-br from-green-500 to-teal-500 p-4 text-white">
                 <div className="text-center h-full flex flex-col justify-center">
-                  <div className="text-3xl mb-2">💳</div>
-                  <p className="text-sm font-medium">Payment Systems</p>
+                  <div className="text-3xl mb-2">🐍</div>
+                  <p className="text-sm font-medium">Python & FastAPI</p>
                 </div>
               </div>
               <div className="aspect-square rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 p-4 text-white">

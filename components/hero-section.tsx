@@ -34,7 +34,7 @@ export function HeroSection() {
   if (!mounted) return null
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 pb-8">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-8 pb-0">
       {/* Animated background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
@@ -150,15 +150,15 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* 2. PHP - Top Left */}
+              {/* 2. FastAPI - Top Left */}
               <div
-                className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 lg:-top-8 lg:-left-8 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl lg:text-2xl shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer group slow-pulse"
+                className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 lg:-top-8 lg:-left-8 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl lg:text-2xl shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer group slow-pulse"
                 style={{ animationDelay: "1s" }}
-                title="PHP"
+                title="FastAPI"
               >
-                <span>{"</>"}</span>
+                <span className="font-mono">⚡</span>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
-                  PHP
+                  FastAPI
                 </div>
               </div>
 

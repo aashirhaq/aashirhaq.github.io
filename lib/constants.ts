@@ -17,7 +17,7 @@ export const PERSONAL_INFO = {
     experience: "6+ years",
     usersServed: "20M+",
     description:
-        "Senior Backend Engineer building scalable, cloud-native systems for 20M+ users. Laravel, Node.js, and AWS expert specializing in high-performance solutions.",
+        "Senior Backend Engineer building scalable, cloud-native systems for 20M+ users. Laravel, Node.js, FastAPI, and AWS expert specializing in high-performance solutions.",
 
     // Social Links
     social: {
@@ -34,9 +34,9 @@ export const PERSONAL_INFO = {
         domain: "aashirhaq.github.io",
         title: "Muhammad Aashir ul Haque | Senior Backend Engineer",
         description:
-            "6+ years experience building scalable systems for 20M+ users. Laravel, Node.js, AWS expert specializing in high-performance backend solutions.",
+            "6+ years experience building scalable systems for 20M+ users. Laravel, Node.js, FastAPI, AWS expert specializing in high-performance backend solutions.",
         keywords:
-            "senior backend engineer, Laravel, Node.js, AWS, PHP, scalable systems, API development, Muhammad Aashir ul Haque",
+            "senior backend engineer, Laravel, Node.js, FastAPI, Python, AWS, PHP, scalable systems, API development, pytest, Muhammad Aashir ul Haque",
     },
 
     // Resume
@@ -73,11 +73,66 @@ export const PERSONAL_INFO = {
 
 // Tech Stack
 export const TECH_STACK = {
-    primary: ["Laravel", "PHP", "MySQL", "MongoDB", "Node.js", "AWS"],
-    languages: ["PHP", "JavaScript", "TypeScript", "SQL", "C#"],
-    frameworks: ["Laravel", "Node.js", "Express.js", "NestJS", "Next.js"],
+    primary: ["Laravel", "PHP", "FastAPI", "Python", "MySQL", "MongoDB", "Node.js", "AWS"],
+    languages: ["PHP", "Python", "JavaScript", "TypeScript", "SQL", "C#"],
+    frameworks: ["Laravel", "FastAPI", "Node.js", "Express.js", "NestJS", "Next.js"],
     databases: ["MySQL", "MongoDB", "Redis", "Elasticsearch", "Firebase"],
     cloud: ["AWS", "Docker"],
+    testing: ["pytest", "PHPUnit", "Jest", "Selenium"],
+} as const
+
+// Education & Certifications
+export const EDUCATION = {
+  degrees: [
+    {
+      degree: "MS in Computer Science and Information Technology",
+      school: "NED University of Engineering and Technology",
+      location: "Karachi, Pakistan",
+      period: "2021 – 2022",
+      description: "Advanced studies in computer science with focus on software engineering and system architecture.",
+      achievements: ["Specialized in Backend Systems", "Advanced Database Management", "Cloud Computing"],
+    },
+    {
+      degree: "BS in Computer Science",
+      school: "University of Karachi",
+      location: "Karachi, Pakistan",
+      period: "2015 – 2018",
+      description:
+        "Comprehensive computer science education with strong foundation in programming and software development.",
+      achievements: ["Software Development", "Database Systems", "Web Technologies"],
+    },
+  ],
+  certifications: [
+    // {
+    //   name: "AWS Certified Solutions Architect",
+    //   issuer: "Amazon Web Services",
+    //   year: "2023",
+    //   type: "Professional Certification",
+    // },
+    // {
+    //   name: "Google Cloud Professional Developer",
+    //   issuer: "Google Cloud",
+    //   year: "2022",
+    //   type: "Professional Certification",
+    // },
+    // {
+    //   name: "MongoDB Certified Developer",
+    //   issuer: "MongoDB Inc.",
+    //   year: "2021",
+    //   type: "Professional Certification",
+    // },
+  ],
+  courses: [
+    {
+      name: "FastAPI - From Beginner to Advanced",
+      platform: "Udemy",
+      year: "2025",
+      description:
+        "Comprehensive course covering FastAPI framework development with advanced features and unit testing using pytest.",
+      skills: ["FastAPI", "Python", "pytest", "pydantic", "API Development", "Unit Testing", "Async Programming"],
+      type: "Online Course",
+    },
+  ],
 } as const
 
 // Contact Form

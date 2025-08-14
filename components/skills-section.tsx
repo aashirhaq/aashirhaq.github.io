@@ -9,6 +9,7 @@ export function SkillsSection() {
       title: "Languages",
       skills: [
         { name: "PHP", level: 95 },
+        { name: "Python", level: 85 },
         { name: "JavaScript", level: 90 },
         { name: "TypeScript", level: 60 },
         { name: "SQL", level: 90 },
@@ -19,6 +20,7 @@ export function SkillsSection() {
       title: "Backend & Frontend Frameworks",
       skills: [
         { name: "Laravel", level: 95 },
+        { name: "FastAPI", level: 85 },
         { name: "Node.js", level: 60 },
         { name: "Express.js", level: 60 },
         { name: "NestJS", level: 55 },
@@ -26,13 +28,14 @@ export function SkillsSection() {
       ],
     },
     {
-      title: "Databases & Caching",
+      title: "Databases & Testing",
       skills: [
         { name: "MySQL", level: 85 },
         { name: "MongoDB", level: 75 },
         { name: "Redis", level: 95 },
         { name: "Elasticsearch", level: 75 },
-        { name: "Firebase", level: 40 },
+        { name: "pytest", level: 80 },
+        { name: "PHPUnit", level: 85 },
       ],
     },
   ]
@@ -81,7 +84,8 @@ export function SkillsSection() {
                   <p className="text-purple-100 mb-4">
                     Demonstrated expertise in architecting and optimizing high-traffic backend systems serving{" "}
                     <strong>20M+ users</strong>. Proven ability to deliver <strong>30%+ performance gains</strong>{" "}
-                    through advanced caching strategies and architectural improvements.
+                    through advanced caching strategies and architectural improvements. Recently expanded expertise with{" "}
+                    <strong>FastAPI and pytest</strong> for modern Python development.
                   </p>
                   <div className="space-y-2">
                     <div className="flex items-center">
@@ -91,6 +95,10 @@ export function SkillsSection() {
                     <div className="flex items-center">
                       <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
                       <span>Cloud Architecture (99.9% system reliability)</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                      <span>FastAPI & pytest (Modern Python development)</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
@@ -107,7 +115,7 @@ export function SkillsSection() {
                     ></div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
-                        <div className="text-3xl font-bold">91</div>
+                        <div className="text-3xl font-bold">93</div>
                         <div className="text-sm">/ 100</div>
                       </div>
                     </div>
