@@ -1,24 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Static export for GitHub Pages. Trailing slashes keep /work/<slug>/ paths
+  // resolving to index.html without a server rewrite.
+  output: "export",
   trailingSlash: true,
-  skipTrailingSlashRedirect: true,
-  distDir: 'out',
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  reactStrictMode: true,
   images: {
-    unoptimized: true
+    // No image optimisation server exists on GitHub Pages.
+    unoptimized: true,
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  basePath: '',
-  // Ensure proper static export
-  experimental: {
-    optimizeCss: true,
-  },
+  // Build fails on type or lint errors — a broken build is better than a
+  // broken site shipped quietly.
+  eslint: { ignoreDuringBuilds: false },
+  typescript: { ignoreBuildErrors: false },
 }
 
 export default nextConfig

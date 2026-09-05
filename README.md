@@ -1,120 +1,84 @@
-# Aashir Portfolio
+# aashirhaq.github.io
 
-A modern, responsive portfolio website built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. This project is designed for developers who want to showcase their work, experience, and skills with a beautiful, customizable site. It is statically exported and deployed to GitHub Pages.
+Personal portfolio for **Aashir ul Haque** — backend and distributed systems engineer.
 
-## Features
-- ⚡ Fast, static export with Next.js
-- 🎨 Styled with Tailwind CSS (customizable themes)
-- 🧩 Modular, reusable React components
-- 🌙 Dark mode support
-- 📱 Fully responsive design
-- 📝 TypeScript for type safety
-- 🛠️ Custom hooks and utility functions
-- 🧑‍💻 Easy to extend with your own sections
-- 🚀 CI/CD deployment to GitHub Pages
+Live at **https://aashirhaq.github.io**
 
-## Directory Structure
+## Design concept — *Systems in Motion*
+
+The visual language comes from the systems described in the content: service
+topologies, request paths, queues and data flow. One rule holds the design
+together — **structure renders cool and static, data in motion renders warm**.
+Every amber element on the site is something moving through a system.
+
+There is one WebGL experience (the hero node field). Everything else that looks
+like a diagram *is* a diagram: hand-authored SVG driven by typed content, so it
+stays readable with JavaScript throttled, motion disabled or WebGL unavailable.
+
+## Stack
+
+| Concern | Choice |
+| --- | --- |
+| Framework | Next.js 14 (App Router), static export |
+| Language | TypeScript, strict |
+| Styling | Tailwind CSS 3, dark-only palette |
+| Motion | Framer Motion |
+| 3D | Three.js + React Three Fiber (hero only, lazily loaded) |
+| Type | Sora (display) · Inter (body) · JetBrains Mono (metrics, system labels) |
+| Hosting | GitHub Pages via GitHub Actions |
+| Forms | Formspree |
+| Analytics | GA4 |
+
+## Layout
+
 ```
-├── app/                # Main app directory (Next.js 13+)
-│   ├── page.tsx        # Homepage
-│   ├── layout.tsx      # Root layout and providers
-│   ├── globals.css     # Global styles (Tailwind)
-├── components/         # Reusable React components
-│   └── ui/             # UI primitives (buttons, cards, etc.)
-├── hooks/              # Custom React hooks
-├── lib/                # Utility functions
-├── public/             # Static assets (images, favicon, etc.)
-├── styles/             # Additional global styles
-├── .github/workflows/  # GitHub Actions for deployment
-├── package.json        # Project metadata and scripts
-├── tsconfig.json       # TypeScript configuration
-├── tailwind.config.ts  # Tailwind CSS config
-├── postcss.config.js   # PostCSS config
+content/          Typed source of truth — profile, experience, projects, stack
+  types.ts        Diagram, case-study and experience shapes
+components/
+  primitives/     Button, Section, Reveal, Metric, Tag
+  system/         SystemField (R3F hero), ArchitectureDiagram (SVG), StackMap
+  sections/       Hero, Work, Experience, Stack, About, Contact
+app/
+  page.tsx        Composed homepage
+  work/[slug]/    Case studies, statically generated
+  robots.ts       /robots.txt
+  sitemap.ts      /sitemap.xml
+scripts/
+  generate-og.mjs Renders public/og.png at build time (prebuild)
 ```
 
-## Getting Started
+Content never lives inside a component. To change a metric, a role or a
+diagram, edit `content/` — the presentation layer reads from it.
 
-### 1. **Clone the repository**
+## Commands
+
 ```bash
-git clone https://github.com/aashirhaq/aashirhaq.github.io.git
-cd aashirhaq.github.io
+npm run dev        # development server
+npm run build      # generate OG card, then static export to ./out
+npm run lint       # eslint
+npm run typecheck  # tsc --noEmit
+npm run check      # lint + typecheck
 ```
 
-### 2. **Install dependencies**
-> **Note:** If you encounter dependency conflicts, see `install-commands.md` for troubleshooting.
+The build fails on lint or type errors by design.
 
-```bash
-npm install --legacy-peer-deps
-# or
-yarn install
-```
+## Performance and resilience
 
-### 3. **Run the development server**
-```bash
-npm run dev
-# or
-yarn dev
-```
-Visit [http://localhost:3000](http://localhost:3000) to view your site.
+- Three.js is code-split and requested only after a runtime check for WebGL,
+  a viewport ≥768px, `prefers-reduced-motion: no-preference`, and >2 CPU cores.
+  It is absent from the initial bundle otherwise.
+- The hero scene stops rendering when scrolled out of view or the tab is hidden.
+- `devicePixelRatio` is capped at 1.75.
+- A static SVG topology stands in wherever the scene is not rendered, so the
+  hero is never an empty space.
+- Fonts are self-hosted by `next/font` with metric overrides, so there is no
+  layout shift and no font-CDN request.
+- All motion is removed under `prefers-reduced-motion`; nothing on the site
+  depends on animation to be understood.
 
-### 4. **Build for production**
-```bash
-npm run build
-```
+## Adding a case study
 
-### 5. **Export static site**
-```bash
-npm run export
-```
-The static files will be output to the `out/` directory.
-
-## Deployment (GitHub Pages)
-This project uses GitHub Actions to deploy the static site to GitHub Pages automatically on every push to `main`.
-
-- The workflow is defined in `.github/workflows/deploy.yml`.
-- Output directory is `out/` (see `next.config.mjs`).
-- No manual action is needed; just push to `main`.
-
-## Customization Guide
-
-1. **Update content:**
-   - Edit files in `components/` (e.g., `hero-section.tsx`, `about-section.tsx`, etc.)
-   - Update static assets in `public/`
-2. **Add new sections:**
-   - Create new components in `components/` and import them in `app/page.tsx`.
-3. **Change theme/colors:**
-   - Edit `tailwind.config.ts` and CSS variables in `app/globals.css`.
-4. **Update metadata:**
-   - Edit `app/layout.tsx` for SEO, Open Graph, and Twitter meta tags.
-5. **Add custom hooks or utilities:**
-   - Place them in `hooks/` or `lib/`.
-
-## Step-by-Step: Create Your Own Portfolio
-
-1. **Create a new Next.js app with TypeScript:**
-   ```bash
-   npx create-next-app@latest my-portfolio -ts
-   cd my-portfolio
-   ```
-2. **Install Tailwind CSS:**
-   ```bash
-   npm install -D tailwindcss postcss autoprefixer
-   npx tailwindcss init -p
-   ```
-3. **Configure Tailwind:**
-   - Update `tailwind.config.js` and add Tailwind imports to your CSS.
-4. **Set up your directory structure:**
-   - Create `components/`, `hooks/`, `lib/`, `public/`, etc.
-5. **Add your pages and components:**
-   - Use modular components for sections (About, Projects, Contact, etc.)
-6. **Customize styles and content:**
-   - Edit Tailwind config, CSS variables, and component props.
-7. **Set up static export:**
-   - In `next.config.js`, set `output: 'export'` and `distDir: 'out'`.
-   - Use `npm run build` and `npm run export`.
-8. **Deploy to GitHub Pages:**
-   - Push to GitHub and set up a GitHub Actions workflow (see `.github/workflows/deploy.yml`).
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE). 
+Add an entry to `content/projects.ts` with `featured: true` and a `caseStudy`
+block. `generateStaticParams` and the sitemap pick it up automatically. If it
+has a `diagram`, place nodes on the `col`/`row` grid — the renderer handles
+routing, arrowheads and the animated flow.
