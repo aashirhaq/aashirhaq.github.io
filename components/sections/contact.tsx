@@ -49,7 +49,7 @@ export function Contact() {
   }
 
   return (
-    <Section id="contact" eyebrow="05 / Contact" title="Let's talk">
+    <Section id="contact" eyebrow="06 / Contact" title="Let's talk">
       <div className="grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
         <div>
           <p className="max-w-prose text-[1.0625rem] leading-relaxed text-ivory-muted text-pretty">

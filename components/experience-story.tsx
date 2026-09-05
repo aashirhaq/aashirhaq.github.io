@@ -9,13 +9,12 @@ import { Reveal } from "@/components/primitives/reveal"
 import { TagList } from "@/components/primitives/tag"
 import { ArchitectureDiagram } from "@/components/system/architecture-diagram"
 
-/** The five stages, in the order an engineer would actually tell the story. */
+/** The four-stage narrative arc: PROBLEM → ARCHITECTURE → CONTRIBUTION → IMPACT. */
 const STAGES = [
   { key: "problem", label: "Problem" },
-  { key: "scale", label: "Scale" },
-  { key: "system", label: "System" },
-  { key: "contribution", label: "My contribution" },
-  { key: "result", label: "Result" },
+  { key: "system", label: "Architecture" },
+  { key: "contribution", label: "Contribution" },
+  { key: "result", label: "Impact" },
 ] as const
 
 export function ExperienceStory({ experience }: { experience: Experience }) {
@@ -61,6 +60,11 @@ export function ExperienceStory({ experience }: { experience: Experience }) {
                 <p className="mt-2.5 max-w-prose text-[0.9375rem] leading-relaxed text-ivory-muted text-pretty">
                   {experience.story[stage.key]}
                 </p>
+                {stage.key === "problem" && (
+                  <p className="mt-2 font-mono text-[0.75rem] text-ivory-faint">
+                    Scale: {experience.story.scale}
+                  </p>
+                )}
               </li>
             ))}
           </ol>

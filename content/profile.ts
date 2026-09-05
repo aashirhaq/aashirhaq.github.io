@@ -99,8 +99,8 @@ export const certifications: Array<{ name: string; issuer?: string; year?: strin
 ]
 
 export const navigation = [
-  { href: "/#work", label: "Work" },
   { href: "/#experience", label: "Experience" },
+  { href: "/#work", label: "Work" },
   { href: "/#stack", label: "Stack" },
   { href: "/#about", label: "About" },
   { href: "/#contact", label: "Contact" },

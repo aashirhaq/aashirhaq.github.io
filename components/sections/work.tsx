@@ -10,7 +10,7 @@ export function Work() {
   return (
     <Section
       id="work"
-      eyebrow="01 / Selected work"
+      eyebrow="03 / Selected work"
       title="Four systems worth explaining"
       intro="Each of these has a case study behind it: the problem, the constraints that shaped it, the architecture, and what actually changed as a result."
       blueprint

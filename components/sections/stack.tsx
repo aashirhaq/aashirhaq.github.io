@@ -14,7 +14,7 @@ export function Stack() {
   return (
     <Section
       id="stack"
-      eyebrow="03 / Engineering stack"
+      eyebrow="04 / Engineering stack"
       title="Grouped by the problem it solves"
       intro="A list of logos says very little. These are the domains I have shipped production systems in, and how they connect to each other."
       blueprint
