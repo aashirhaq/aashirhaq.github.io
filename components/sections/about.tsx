@@ -12,7 +12,7 @@ const PARAGRAPHS = [
 
 export function About() {
   return (
-    <Section id="about" eyebrow="05 / About" title="How I think about systems">
+    <Section id="about" eyebrow="04 / About" title="How I think about systems">
       <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
         <Reveal className="max-w-prose space-y-6">
           {PARAGRAPHS.map((paragraph) => (

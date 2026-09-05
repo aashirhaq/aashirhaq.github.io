@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react"
-import { profile } from "@/content/profile"
+import { impactMetrics, profile } from "@/content/profile"
 import { ButtonLink } from "@/components/primitives/button"
 import { SystemField } from "@/components/system/system-field"
 import { trackDownload } from "@/lib/analytics"
@@ -96,8 +96,8 @@ export function Hero() {
           </motion.p>
 
           <motion.div {...rise(0.32)} className="mt-11 flex flex-wrap items-center gap-3">
-            <ButtonLink href="/#experience">
-              View experience
+            <ButtonLink href="/#work">
+              View selected work
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </ButtonLink>
             <ButtonLink
@@ -108,17 +108,36 @@ export function Hero() {
               onClick={() => trackDownload(profile.resume.filename, "hero")}
             >
               <Download className="h-4 w-4" aria-hidden="true" />
-              Download resume
+              Résumé
             </ButtonLink>
             <ButtonLink href="/#contact" variant="ghost">
-              Contact
+              Get in touch
             </ButtonLink>
           </motion.div>
         </div>
+
+        {/* Headline numbers, in the first screen where they do the most work. */}
+        <motion.dl
+          {...rise(0.4)}
+          className="mt-16 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-8 border-t border-wire pt-8 sm:grid-cols-4"
+        >
+          {impactMetrics.map((m) => (
+            <div key={m.label}>
+              <dt className="sr-only">{m.label}</dt>
+              <dd>
+                <div className="font-mono text-[clamp(1.5rem,3vw,2rem)] font-medium tabular-nums text-signal">
+                  {m.value}
+                </div>
+                <div className="mt-1.5 text-[0.8125rem] leading-snug text-ivory-muted">{m.label}</div>
+                <div className="mt-0.5 text-xs text-ivory-faint">{m.note}</div>
+              </dd>
+            </div>
+          ))}
+        </motion.dl>
       </div>
 
       <a
-        href="#metrics"
+        href="#work"
         className="absolute bottom-7 right-[var(--shell-gutter)] hidden items-center gap-2 rounded font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-ivory-faint transition-colors hover:text-ivory lg:flex"
       >
         Scroll
