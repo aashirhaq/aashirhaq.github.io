@@ -1,9 +1,0 @@
-*.ipynb linguist-detectable=false
-*.html linguist-detectable=false
-*.css linguist-detectable=false
-*.blade.php linguist-detectable=false
-*.njk linguist-detectable=false
-*.nunjucks linguist-detectable=false
-Makefile linguist-detectable=false
-Dockerfile linguist-detectable=false
-*.sh linguist-detectable=false

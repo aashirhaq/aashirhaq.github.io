@@ -1,107 +1,104 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import Script from "next/script"
-import { PERSONAL_INFO } from "@/lib/constants"
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import { HolographicBackground } from "@/components/cinematic/HolographicBackground";
+import { IntroSequence } from "@/components/cinematic/IntroSequence";
+import { RouteSweep } from "@/components/cinematic/RouteSweep";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/navigation/SiteHeader";
+import { profile } from "@/content/profile";
+import { site } from "@/content/site";
+import { introGateScript } from "@/lib/intro-gate";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] })
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"], display: "swap" });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: PERSONAL_INFO.website.title,
-  description: PERSONAL_INFO.website.description,
-  keywords: PERSONAL_INFO.website.keywords,
-  authors: [{ name: PERSONAL_INFO.name }],
+  metadataBase: new URL(site.url),
+  title: { default: site.title, template: `%s — ${profile.name}` },
+  description: site.description,
+  applicationName: profile.name,
+  authors: [{ name: profile.name, url: site.url }],
+  creator: profile.name,
+  keywords: [
+    "Backend Engineer",
+    "AI Engineer",
+    "Distributed Systems",
+    "Payments",
+    "Elasticsearch",
+    "Laravel",
+    "Node.js",
+    "NestJS",
+    "Python",
+    "RAG",
+    "LLM",
+    "AWS",
+  ],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: PERSONAL_INFO.website.url,
-    title: PERSONAL_INFO.website.title,
-    description: PERSONAL_INFO.website.description,
-    images: [
-      {
-        url: `${PERSONAL_INFO.website.url}${PERSONAL_INFO.images.socialPreview}`,
-        width: 1200,
-        height: 630,
-        alt: `${PERSONAL_INFO.name} - ${PERSONAL_INFO.title}`,
-      },
-    ],
+    url: site.url,
+    siteName: profile.name,
+    title: site.title,
+    description: site.description,
+    locale: site.locale,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${profile.name} — ${profile.positioning}` }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: PERSONAL_INFO.website.title,
-    description: PERSONAL_INFO.website.description,
-    images: [`${PERSONAL_INFO.website.url}${PERSONAL_INFO.images.socialPreview}`],
-  },
-  icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='15' y='25' width='20' height='50' rx='2' fill='%234f46e5'/><rect x='40' y='15' width='20' height='60' rx='2' fill='%234f46e5'/><rect x='65' y='30' width='20' height='45' rx='2' fill='%234f46e5'/><circle cx='25' cy='20' r='3' fill='%23fff'/><circle cx='50' cy='10' r='3' fill='%23fff'/><circle cx='75' cy='25' r='3' fill='%23fff'/></svg>",
-  },
-  metadataBase: new URL(PERSONAL_INFO.website.url),
-  alternates: {
-    canonical: PERSONAL_INFO.website.url,
-  },
-}
+  twitter: { card: "summary_large_image", title: site.title, description: site.description, images: ["/og.png"] },
+  robots: { index: true, follow: true },
+  formatDetection: { telephone: false },
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const viewport: Viewport = {
+  themeColor: "#03060d",
+  colorScheme: "dark",
+};
+
+const isProduction = process.env.NODE_ENV === "production";
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      // Lets Next.js turn off smooth scrolling during route changes (jump to top instantly).
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
-        {/* Google Analytics */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${PERSONAL_INFO.analytics.googleAnalyticsId}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${PERSONAL_INFO.analytics.googleAnalyticsId}');
-          `}
-        </Script>
-
-        {/* Additional Meta Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="author" content={PERSONAL_INFO.name} />
-
-        {/* Schema.org JSON-LD */}
-        <Script
-          id="schema-org"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: PERSONAL_INFO.name,
-              jobTitle: PERSONAL_INFO.title,
-              url: PERSONAL_INFO.website.url,
-              sameAs: [PERSONAL_INFO.social.linkedin, PERSONAL_INFO.social.github, PERSONAL_INFO.social.stackoverflow],
-              description: PERSONAL_INFO.description,
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Glen Ellyn",
-                addressRegion: "IL",
-                addressCountry: "USA",
-              },
-              email: `mailto:${PERSONAL_INFO.email}`,
-              telephone: PERSONAL_INFO.phone,
-              image: `${PERSONAL_INFO.website.url}${PERSONAL_INFO.images.cover}`,
-            }),
-          }}
-        />
+        {/* Decides intro vs. portfolio before first paint — see lib/intro-gate.ts. */}
+        <script dangerouslySetInnerHTML={{ __html: introGateScript }} />
       </head>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+      {/* Extensions (Grammarly, ColorZilla, …) inject attributes on <body> before hydration. */}
+      <body suppressHydrationWarning>
+        <a
+          href="#main"
+          className="sr-only z-[100] rounded-md bg-ink px-4 py-2 text-bg focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+        >
+          Skip to content
+        </a>
+
+        <HolographicBackground />
+        <IntroSequence />
+
+        <div id="site-root" className="relative z-10">
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
+        </div>
+
+        <RouteSweep />
+
+        {isProduction && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`} strategy="afterInteractive" />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${site.gaMeasurementId}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
-  )
+  );
 }

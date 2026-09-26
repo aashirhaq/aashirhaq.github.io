@@ -1,115 +1,646 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
+/* ------------------------------------------------------------------
+   Design tokens — sampled from the two cinematic sources:
+   near-black lab / deep navy corridor, cyan chip glow, electric-blue
+   mesh, violet node accents.
+------------------------------------------------------------------- */
+:root {
+  --bg-primary: #03060d;
+  --bg-deep: #050a17;
+  --bg-elevated: #0a1224;
+  --bg-panel: rgb(6 12 26 / 0.72);
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+  --text-primary: #eaf2ff;
+  --text-secondary: #a9b8cf;
+  --text-muted: #7486a3;
+
+  --holo-cyan: #5ee1ff;
+  --holo-blue: #3b82ff;
+  --holo-violet: #9b7bff;
+
+  --glass-fill: rgb(10 20 42 / 0.55);
+  --glass-fill-strong: rgb(6 12 26 / 0.82);
+  --glass-border: rgb(120 190 255 / 0.14);
+  --glass-border-strong: rgb(110 220 255 / 0.32);
+  --glow-soft: 0 0 24px rgb(94 225 255 / 0.12);
+  --glow-strong: 0 0 32px rgb(94 225 255 / 0.28);
+
+  --scrim: rgb(3 6 13 / 0.62);
+
+  /* Layer system (low → high). */
+  --z-background: 0;
+  --z-environment: 1;
+  --z-content: 10;
+  --z-nav: 40;
+  --z-transition: 60;
+  --z-cinematic: 80;
+  --z-modal: 100;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  color-scheme: dark;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+@theme inline {
+  --color-bg: var(--bg-primary);
+  --color-bg-deep: var(--bg-deep);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-ink: var(--text-primary);
+  --color-ink-2: var(--text-secondary);
+  --color-ink-3: var(--text-muted);
+  --color-cyan: var(--holo-cyan);
+  --color-blue: var(--holo-blue);
+  --color-violet: var(--holo-violet);
+  --color-line: var(--glass-border);
+  --color-line-strong: var(--glass-border-strong);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --ease-out-expo: var(--ease-out);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-muted;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/30 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground/50;
-}
-
-/* Smooth scrolling */
 html {
+  background: var(--bg-primary);
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* Grid background */
-.grid-bg {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  overflow-x: clip;
 }
 
-/* Gradient text animation */
-@keyframes gradient {
-  0%,
-  100% {
-    background-position: 0% 50%;
+::selection {
+  background: rgb(94 225 255 / 0.28);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--holo-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ------------------------------------------------------------------
+   Holographic environment
+------------------------------------------------------------------- */
+.environment {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-background);
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+  background-image: url("/media/holographic-world.poster.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 767px) {
+  .environment {
+    background-image: url("/media/holographic-world.poster.mobile.webp");
+    background-position: 50% 50%;
   }
+}
+
+.environment video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Readability treatment: the footage stays vivid at the edges while the
+   reading column gets a darker, cooler field. */
+.environment-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-environment);
+  background:
+    radial-gradient(85% 75% at 38% 50%, rgb(3 6 13 / 0.5) 0%, rgb(3 6 13 / 0.28) 65%, rgb(3 6 13 / 0.12) 100%),
+    linear-gradient(180deg, rgb(3 6 13 / 0.42) 0%, rgb(3 6 13 / 0.4) 50%, rgb(3 6 13 / 0.55) 100%);
+  transition: opacity 900ms var(--ease-out);
+}
+
+.environment-grain {
+  position: absolute;
+  inset: -50%;
+  z-index: var(--z-environment);
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------
+   Cinematic intro states (driven by <html data-intro>)
+   - unset / "done": normal site (also the no-JS state)
+   - "play":   intro overlay visible, portfolio waiting to materialize
+   - "reveal": portfolio materializing (staggered)
+   - "enter":  returning visitor — fast, CSS-only settle-in
+------------------------------------------------------------------- */
+.intro-layer {
+  display: none;
+}
+
+html[data-intro="play"] .intro-layer,
+.intro-layer[data-live] {
+  display: block;
+}
+
+.intro-skip {
+  z-index: var(--z-modal);
+}
+
+/* Intro caption: typed, monospace, vertically centered on the left, on a dark
+   glass panel so it stays readable over the moving footage. Clears before the
+   chip push. */
+.intro-caption {
+  position: fixed;
+  top: 50%;
+  left: clamp(1rem, 5vw, 5rem);
+  max-width: calc(100vw - 2rem);
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.5rem, 1.2vw, 0.9rem);
+  padding: clamp(0.9rem, 1.8vw, 1.5rem) clamp(1rem, 2.2vw, 2rem) clamp(0.9rem, 1.8vw, 1.5rem) clamp(1.25rem, 2.6vw, 2.35rem);
+  border: 1px solid rgb(120 200 255 / 0.18);
+  border-radius: 14px;
+  background: rgb(3 7 16 / 0.74);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  box-shadow:
+    0 24px 60px -20px rgb(0 0 0 / 0.8),
+    inset 0 1px 0 rgb(180 230 255 / 0.08);
+  pointer-events: none;
+  font-family: var(--font-mono);
+  opacity: 0;
+  transform: translate(-12px, -50%);
+  transition:
+    opacity 500ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+
+/* Luminous accent bar on the left edge. */
+.intro-caption::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent, var(--holo-cyan), transparent);
+  box-shadow: 0 0 12px var(--holo-cyan);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .intro-caption {
+    background: rgb(3 7 16 / 0.85);
+  }
+}
+
+.intro-caption[data-shown] {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+/* The row reserves the finished line's width, so the panel never resizes while typing. */
+.caption-row {
+  display: block;
+  width: calc(var(--chars) * 1ch + 4px);
+  max-width: 100%;
+  letter-spacing: 0; /* keeps 1ch == 1 character */
+}
+
+.caption-line {
+  display: block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-shadow: 0 1px 16px rgb(0 0 0 / 0.9);
+  border-right: 2px solid transparent;
+  padding-right: 2px;
+}
+
+.caption-setup {
+  font-size: clamp(11.5px, 3vw, 24px);
+  color: var(--text-primary);
+}
+
+.caption-payoff {
+  font-size: clamp(16px, 4.4vw, 46px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--holo-cyan);
+}
+
+.caption-payoff .caption-line {
+  text-shadow:
+    0 0 24px rgb(94 225 255 / 0.35),
+    0 1px 16px rgb(0 0 0 / 0.9);
+}
+
+/* Untyped lines stay fully hidden (otherwise the first glyph's edge peeks out). */
+.caption-line:not([data-on]) {
+  visibility: hidden;
+}
+
+.caption-line[data-on] {
+  animation: caption-type calc(var(--chars) * 42ms) steps(var(--chars), end) forwards;
+}
+
+.caption-line[data-active] {
+  animation:
+    caption-type calc(var(--chars) * 42ms) steps(var(--chars), end) forwards,
+    caption-caret 900ms steps(1) infinite;
+}
+
+@keyframes caption-type {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes caption-caret {
+  0%,
   50% {
+    border-right-color: var(--holo-cyan);
+  }
+  51%,
+  100% {
+    border-right-color: transparent;
+  }
+}
+
+
+.intro-skip[data-hidden] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+html[data-intro="play"] .environment-scrim {
+  opacity: 0;
+}
+
+/* While the intro owns the screen, the world must not show through the
+   intro's opening fade (it would flash the corridor before the robot). */
+html[data-intro="play"] .environment {
+  background-image: none;
+}
+
+html[data-intro="play"] [data-reveal] {
+  opacity: 0;
+}
+
+html[data-intro="reveal"] [data-reveal] {
+  animation: materialize 620ms var(--ease-out) both;
+  animation-delay: calc(var(--reveal-step, 0) * 85ms);
+}
+
+html[data-intro="enter"] [data-reveal] {
+  animation: settle 420ms var(--ease-out) both;
+  animation-delay: calc(var(--reveal-step, 0) * 40ms);
+}
+
+@keyframes materialize {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Intro overlay */
+.intro-stage {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-cinematic);
+  background-color: var(--bg-primary);
+  background-image: url("/media/robot-intro.poster.webp");
+  background-size: cover;
+  background-position: 50% 50%;
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 900ms var(--ease-out),
+    filter 700ms var(--ease-out);
+}
+
+/* Opening fade from the page background, gated on the poster being decoded
+   (set by the head script) so the first image never pops in. */
+html[data-intro="play"]:not([data-poster]) .intro-stage {
+  opacity: 0;
+}
+
+.intro-stage video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Portrait screens see ~25% of the 16:9 frame, so the camera pans: it opens
+   on the robot (right), follows its hand to the chip, and lands centred —
+   the same framing as the background loop it hands off to. */
+@media (max-width: 767px) {
+  .intro-stage {
     background-position: 100% 50%;
   }
+
+  .intro-stage video {
+    object-position: 100% 50%;
+  }
+
+  .intro-stage[data-playing] video {
+    animation: intro-pan var(--intro-remaining, 11s) linear forwards;
+  }
 }
 
-.animate-gradient {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+@keyframes intro-pan {
+  /* Timed against the footage: robot at the right edge (0–4s), hand reaching
+     the panels (~6.5s), chip centred by the push-in (~9s). */
+  0% {
+    object-position: 100% 50%;
+  }
+  35% {
+    object-position: 96% 50%;
+  }
+  60% {
+    object-position: 72% 50%;
+  }
+  80% {
+    object-position: 50% 50%;
+  }
+  100% {
+    object-position: 50% 50%;
+  }
+}
+
+/* Once the corridor is on screen the intro behaves like the environment:
+   it drops beneath the content and gains the same readability scrim, so the
+   final handoff to the background loop is image-identical. */
+.intro-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(85% 75% at 38% 50%, rgb(3 6 13 / 0.5) 0%, rgb(3 6 13 / 0.28) 65%, rgb(3 6 13 / 0.12) 100%),
+    linear-gradient(180deg, rgb(3 6 13 / 0.42) 0%, rgb(3 6 13 / 0.4) 50%, rgb(3 6 13 / 0.55) 100%);
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.intro-stage[data-state="reveal"],
+.intro-stage[data-state="handoff"] {
+  z-index: var(--z-environment);
+}
+
+.intro-stage[data-dim]::after {
+  opacity: 1;
+  transition-duration: 2200ms;
+  transition-timing-function: var(--ease-in-out);
+}
+
+.intro-stage[data-state="reveal"]::after,
+.intro-stage[data-state="handoff"]::after {
+  opacity: 1;
+}
+
+.intro-stage[data-state="handoff"] {
+  opacity: 0;
+}
+
+.intro-stage[data-state="skipping"] {
+  opacity: 0;
+  transform: scale(1.12);
+  filter: brightness(1.15) blur(4px);
+}
+
+/* A single luminous sweep used for skip, section jumps and route changes. */
+.holo-sweep {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.holo-sweep::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20%;
+  height: 20%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(94 225 255 / 0.05) 40%,
+    rgb(94 225 255 / 0.22) 49%,
+    rgb(200 245 255 / 0.55) 50%,
+    rgb(94 225 255 / 0.18) 51%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  animation: sweep 560ms var(--ease-in-out) forwards;
+}
+
+@keyframes sweep {
+  to {
+    transform: translateY(620%);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Instrumentation surfaces
+------------------------------------------------------------------- */
+.panel {
+  position: relative;
+  background: linear-gradient(180deg, rgb(12 24 48 / 0.62), rgb(5 10 22 / 0.78));
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 1px 0 rgb(180 230 255 / 0.06),
+    0 20px 40px -24px rgb(0 0 0 / 0.7);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .panel {
+    background: var(--glass-fill-strong);
+  }
+}
+
+/* Corner ticks — a restrained HUD cue instead of glowing borders. */
+.hud-corners::before {
+  --tick: 10px;
+  --tick-color: rgb(94 225 255 / 0.55);
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--tick-color), var(--tick-color)) top left / var(--tick) 1px no-repeat,
+    linear-gradient(var(--tick-color), var(--tick-color)) top left / 1px var(--tick) no-repeat,
+    linear-gradient(var(--tick-color), var(--tick-color)) bottom right / var(--tick) 1px no-repeat,
+    linear-gradient(var(--tick-color), var(--tick-color)) bottom right / 1px var(--tick) no-repeat;
+}
+
+.module-card {
+  transition:
+    border-color 300ms var(--ease-out),
+    transform 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out);
+}
+
+.module-card::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--holo-cyan), transparent);
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 500ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .module-card:hover,
+  .module-card:focus-within {
+    border-color: var(--glass-border-strong);
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgb(180 230 255 / 0.08),
+      var(--glow-soft),
+      0 24px 48px -24px rgb(0 0 0 / 0.8);
+  }
+
+  .module-card:hover::after,
+  .module-card:focus-within::after {
+    opacity: 0.9;
+    transform: scaleX(1);
+  }
+}
+
+.text-glow {
+  text-shadow: 0 0 28px rgb(94 225 255 / 0.25);
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #f4f9ff 0%, #bfe9ff 45%, #9fb8ff 80%, #b9a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(120 200 255 / 0.35), transparent);
+}
+
+/* Timeline data-flow pulse (transform/opacity only). */
+.flow-pulse {
+  animation: flow 3.6s var(--ease-in-out) infinite;
+}
+
+@keyframes flow {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400%);
+    opacity: 0;
+  }
+}
+
+.status-dot {
+  animation: status 2.4s ease-in-out infinite;
+}
+
+@keyframes status {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Pointer-reactive parallax on the hero HUD (desktop only; set via JS). */
+.parallax {
+  transform: translate3d(calc(var(--px, 0) * 1px), calc(var(--py, 0) * 1px), 0);
+  transition: transform 600ms var(--ease-out);
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion: no cinematic, no sweeps, no nonessential movement.
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+
+  .holo-sweep,
+  .flow-pulse {
+    display: none;
+  }
+
+  .parallax {
+    transform: none !important;
+  }
+
+  .environment video {
+    display: none;
+  }
 }
