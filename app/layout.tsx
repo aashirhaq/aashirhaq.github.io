@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import { HolographicBackground } from "@/components/cinematic/HolographicBackground";
-import { IntroSequence } from "@/components/cinematic/IntroSequence";
 import { RouteSweep } from "@/components/cinematic/RouteSweep";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { profile } from "@/content/profile";
 import { site } from "@/content/site";
-import { introGateScript } from "@/lib/intro-gate";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"], display: "swap" });
@@ -66,10 +63,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
-      <head>
-        {/* Decides intro vs. portfolio before first paint — see lib/intro-gate.ts. */}
-        <script dangerouslySetInnerHTML={{ __html: introGateScript }} />
-      </head>
       {/* Extensions (Grammarly, ColorZilla, …) inject attributes on <body> before hydration. */}
       <body suppressHydrationWarning>
         <a
@@ -79,8 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
 
-        <HolographicBackground />
-        <IntroSequence />
+        <div aria-hidden="true" className="fixed inset-0 bg-[#040911]" />
 
         <div id="site-root" className="relative z-10">
           <SiteHeader />

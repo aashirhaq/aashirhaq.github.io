@@ -1,0 +1,32 @@
+.work-wrap {width:min(1200px,90%);margin-inline:auto}
+.work-hero {position:relative;isolation:isolate;background:#050b14;overflow:hidden;border-bottom:1px solid #244052}
+.hero-art {position:absolute;z-index:-1;inset:0 0 0 32%;background:linear-gradient(90deg,#050b14 0%,#050b14bb 22%,transparent 65%),linear-gradient(0deg,#050b14 0%,transparent 35%),url('/media/workstation.webp') 65% center/cover no-repeat}
+.hero-inner {padding-block:clamp(8rem,14vh,12rem) clamp(4rem,9vh,8rem)}
+.kicker,.hero-location,.trace-copy small,figcaption {font-family:var(--font-mono);font-size:.78rem;letter-spacing:.04em}
+.kicker {color:#86eada;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.work-hero h1 {font-size:clamp(3.4rem,7.3vw,7.3rem);line-height:.98;font-weight:600;letter-spacing:-.074em;margin:1.25rem 0}
+.hero-specialty {font-size:clamp(1.5rem,2.75vw,2.8rem);letter-spacing:-.04em;font-weight:500}.hero-specialty span{color:#83ebe3}
+.hero-copy,.work-deck,.trace-copy p,.studio-section details p {line-height:1.65;color:#b7c7d5}
+.hero-copy {max-width:29rem;margin:1.2rem 0}.hero-location {color:#bed6df;margin-top:1.7rem}
+.hero-actions,.hero-links,.trace-switch {display:flex;flex-wrap:wrap;gap:.7rem}
+.hero-actions {margin:1.35rem 0}.hero-actions a,.trace-switch button {padding:.72rem 1rem;border-radius:.5rem;border:1px solid #426477;background:#0a1827;color:#ecf7ff;font-weight:550}
+.hero-actions a:first-child,.trace-switch button[aria-pressed=true]{background:#a3f2e6;color:#092421;border-color:#a3f2e6}
+.hero-links {gap:1.2rem;color:#bad0df;font-size:.86rem}.hero-links a:hover,.studio-link:hover,.trace-board a:hover {text-decoration:underline}
+.work-section {padding-block:clamp(3.5rem,6vw,6rem);background:#07111c;border-bottom:1px solid #263745}
+.work-section h2 {font-size:clamp(2.6rem,5vw,5rem);font-weight:550;letter-spacing:-.065em;line-height:1.02;margin:.8rem 0 1rem}
+.work-deck {max-width:41rem;font-size:1.05rem}
+.trace-layout,.studio-layout {display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:start}.trace-layout{margin-top:2.5rem}
+.trace-board {position:sticky;top:6rem;background:radial-gradient(ellipse at 20% 35%,#112d41,#091521 72%);border:1px solid #284151;padding:clamp(1rem,2.7vw,2.5rem);border-radius:1rem}
+.trace-switch {gap:.4rem}.trace-switch button {font-size:.82rem;cursor:pointer}
+.trace-map {margin:1.7rem 0;list-style:none}
+.trace-map li {position:relative;padding-bottom:1rem}.trace-map li:not(:last-child)::before {content:"";position:absolute;left:1.05rem;top:2rem;bottom:0;width:1px;background:#416577}
+.trace-map button {display:flex;gap:1rem;align-items:center;cursor:pointer;color:#b9c9d7;text-align:left}
+.trace-map span {display:grid;place-items:center;width:2.15rem;height:2.15rem;border-radius:50%;background:#132a36;border:1px solid #416372;font: .75rem var(--font-mono)}
+.trace-map [data-active=true] span {color:#031515;background:#8ce8d9;box-shadow:0 0 18px #7af6ec44}
+.trace-map [data-active=true] button{color:white}
+.trace-board a,.studio-link {color:#93e8dc;font-weight:550}.trace-copy li {padding:1.6rem 0 2.5rem;border-top:1px solid #294051}.trace-copy h3 {font-size:1.55rem;letter-spacing:-.035em;margin:.4rem 0}.trace-copy small{color:#72d3cc}
+.studio-section {background:linear-gradient(120deg,#131424,#0e1722)}.studio-layout {grid-template-columns:0.8fr 1.2fr;align-items:center}.studio-section .kicker{color:#e5c29a}
+.studio-section video {width:100%;aspect-ratio:16/9;border-radius:.8rem;background:#060910;object-fit:contain}.studio-section figcaption{margin-top:.8rem;color:#b9c6d3}
+.studio-section details{margin:1.4rem 0}.studio-section summary{cursor:pointer}.studio-section details p{margin-top:.8rem}
+@media(max-width:760px){.hero-art{inset:0;opacity:.55;background-position:70% top;background-size:auto 65%;background-image:linear-gradient(0deg,#050b14 22%,#050b14aa 65%,#050b1477),url('/media/workstation.webp')}.hero-inner{padding-block:8rem 3rem}.trace-layout,.studio-layout{grid-template-columns:1fr;gap:1.5rem}.trace-board{position:static}.trace-copy li{padding:1rem 0}.work-wrap{width:90%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
