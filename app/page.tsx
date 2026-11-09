@@ -25,6 +25,10 @@ export default function HomePage() {
           <div className="hero-actions"><a href="#payment-trace">Trace a payment ↓</a><a href="#agent-demo">Watch the agent demo ▷</a></div>
           <div className="hero-links"><a href="/media/aashir-resume.pdf">Résumé ↗</a><a href="https://github.com/aashirhaq">GitHub ↗</a><a href="#contact">Contact ↗</a></div>
         </div>
+        <a className="hero-route" href="#payment-trace" aria-label="Explore the subscription payment route">
+          <span>Subscription route</span>
+          <strong>Checkout <i /> Gateway <i /> Access</strong>
+        </a>
       </section>
       <PaymentWalkthrough />
       <section id="agent-demo" className="work-section studio-section">
